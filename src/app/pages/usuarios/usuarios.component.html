@@ -1,0 +1,103 @@
+<button class="btn btn-primary mb-5 btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
+    aria-expanded="false" aria-controls="collapseExample">
+    Formulario de ingreso de usuarios
+</button>
+
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+
+        <form [formGroup]="usuarioForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>
+                        Nombre:
+                    </label>
+                    <input type="text" class="form-control" name="nom" [(ngModel)]="Usuario.nombre"
+                        formControlName="Nombre">
+
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Usuario:
+                    </label>
+                    <input type="text" class="form-control" name="ape" [(ngModel)]="Usuario.user"
+                        formControlName="User">
+
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>
+                        Contraseña:
+                    </label>
+                    <input type="password" class="form-control" name="email" (change)="passwordVerification()" [(ngModel)]="Usuario.pass"
+                        formControlName="Pass">
+
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Repetir contraseña:
+                    </label>
+                    <input type="password" class="form-control" #pass (change)="passwordVerification(pass.value)" name="tel" formControlName="ConfirmPass">
+                    <label class="text-danger" *ngIf="!show">
+                        {{msj}}
+                    </label>
+                </div>
+
+                <div class="col-md-6">
+                        <label>
+                            Roles: 
+                        </label>
+                        <select type="select" class="form-control" name="tipodoc" [(ngModel)]="Usuario.roles"
+                            formControlName="Roles">
+                            <option [ngValue]="rol" *ngFor="let rol of arrRoles">{{rol.descripcion}}</option>
+                        </select>
+    
+                    </div>
+
+
+
+            </div>
+
+            <button class="btn btn-primary mt-3" (click)="postUsuarios ()" [disabled]="!usuarioForm.valid">Agregar
+                empleado</button>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let usr of arrUsuarios">
+            <th scope="row">{{usr.id}}</th>
+            <td>{{usr.nombre}}</td>
+            <td>{{usr.user}}</td>
+            <td>{{usr.roles.descripcion}}</td>
+            <td>
+
+                <button type="button" (click)="edit(usr)" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample" class="mr-2 btn btn-success">Editar</button>
+
+                <button type="button" (click)="delete(usr.id)" class="btn btn-danger">Eliminar</button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

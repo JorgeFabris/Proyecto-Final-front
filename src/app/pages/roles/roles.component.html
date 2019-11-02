@@ -1,0 +1,73 @@
+<button class="btn btn-primary mb-5 btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
+    aria-expanded="false" aria-controls="collapseExample">
+    Formulario de ingreso de roles
+</button>
+
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+
+        <form [formGroup]="rolesForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>
+                        Descripcion:
+                    </label>
+                    <input type="text" class="form-control" name="nom" [(ngModel)]="Rol.descripcion"
+                        formControlName="Descripcion">
+
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Nivel:
+                    </label>
+                    <input type="number" class="form-control" name="ape" [(ngModel)]="Rol.nivel"
+                        formControlName="Nivel">
+
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+            <button class="btn btn-primary mt-3" (click)="postRoles()" [disabled]="!rolesForm.valid">Agregar
+                rol</button>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Nivel</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rol of arrRoles">
+            <th scope="row">{{rol.id}}</th>
+            <td>{{rol.descripcion}} </td>  
+            <td>{{rol.nivel}}</td>
+            <td>
+
+                <button type="button" (click)="edit(rol)" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample" class="mr-2 btn btn-success">Editar</button>
+
+                <button type="button" (click)="delete(rol.id)" class="btn btn-danger">Eliminar</button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

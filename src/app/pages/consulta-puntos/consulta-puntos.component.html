@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6">
+        <label for="dateDesde">Desde</label>
+        <input type="date" class="form-control" [(ngModel)]="Consulta.desde" id="dateDesde">
+
+    </div>
+    <div class="col-md-6">
+        <label for="dateHasta">Hasta</label>
+        <input type="date" class="form-control" [(ngModel)]="Consulta.hasta" id="dateHasta">
+    </div>
+
+    <div class="col-md-12">
+        <label>
+            Empleado:   
+        </label>
+        <select type="select" class="form-control" name="tipodoc" [(ngModel)]="Consulta.id">
+            <option [ngValue]="emp.id" *ngFor="let emp of arrEmpleados">{{emp.nombre}} {{emp.apellido}}</option>
+        </select>
+
+    </div>
+
+    <div class="col-md-4 mt-3">
+        <button class="btn btn-primary" (click)="getEntreFechas()">Consultar puntos</button>
+    </div>
+</div>
+
+
+<div class="mt-4">
+    <p>Total de puntos: {{total}}</p>
+</div>

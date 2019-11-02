@@ -1,0 +1,101 @@
+
+<button class="btn btn-primary mb-5 btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
+aria-expanded="false" aria-controls="collapseExample">
+Formulario de ingreso de empleados puntos
+</button>
+
+<div class="collapse" id="collapseExample">
+<div class="card card-body">
+
+    <form [formGroup]="empleadosPuntosForm">
+        <div class="row">
+            <div class="col-md-6">
+                <label>
+                    Fecha:
+                </label>
+                <input type="date" class="form-control" name="nom" [(ngModel)]="EmpleadoPunto.fecha"
+                    formControlName="Fecha">
+
+
+            </div>
+
+
+            <div class="col-md-6">
+                <label>
+                   Puntos :
+
+                </label>
+                <select type="select" class="form-control"   name="tipodoc" [(ngModel)]="EmpleadoPunto.puntos"
+                    formControlName="Puntos">
+                    <option [ngValue]="punt" *ngFor="let punt of arrPuntos">{{punt.descrip}}</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-6">
+                <label>
+                    Empleado:
+                </label>
+                <select type="select" class="form-control" name="tipodoc" [(ngModel)]="EmpleadoPunto.empleado"
+                    formControlName="Empleado">
+                    <option [ngValue]="emp" *ngFor="let emp of arrEmpleados">{{emp.nombre}} {{emp.apellido}}</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-6">
+                <label>
+                    Usuario: 
+                </label>
+                <select type="select" class="form-control" name="tipodoc" [(ngModel)]="EmpleadoPunto.users"
+                    formControlName="Usuario">
+                    <option [ngValue]="usr" *ngFor="let usr of arrUsuarios">{{usr.nombre}}</option>
+                </select>
+
+            </div>
+
+
+
+        </div>
+
+        <button class="btn btn-primary mt-3" (click)="postEmpleadosPuntos()" [disabled]="!empleadosPuntosForm.valid">Agregar
+            empleado puntos</button>
+
+
+          
+    </form>
+</div>
+</div>
+
+
+
+
+<table class="table">
+<thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Empleado</th>
+        <th scope="col">Puntos descripcion</th>
+        <th scope="col">Puntos ingresados</th>
+        <th scope="col">Usuarios</th>
+        <th scope="col">Acciones</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let emp of arrEmpleadosPuntos">
+        <th scope="row">{{emp.id}}</th>
+        <td>{{emp.empleado.nombre}} {{emp.empleado.apellido}}</td>
+        <td>{{emp.puntos.descrip}}</td>
+        <td>{{emp.puntosingresados}}</td>
+        <td>{{emp.users.user}}</td>
+        <td>
+<!-- 
+            <button type="button" (click)="edit(emp)" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample" class="mr-2 btn btn-success">Editar</button> -->
+
+            <button type="button" (click)="delete(emp.id)" class="btn btn-danger">Eliminar</button>
+
+        </td>
+    </tr>
+</tbody>
+</table>

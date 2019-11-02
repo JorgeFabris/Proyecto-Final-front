@@ -1,0 +1,119 @@
+<button class="btn btn-primary mb-5 btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
+    aria-expanded="false" aria-controls="collapseExample">
+    Formulario de ingreso de empleados
+</button>
+
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+
+        <form [formGroup]="empleadoForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>
+                        Nombre:
+                    </label>
+                    <input type="text" class="form-control" name="nom" [(ngModel)]="Empleado.nombre"
+                        formControlName="Nombre">
+
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Apellido:
+                    </label>
+                    <input type="text" class="form-control" name="ape" [(ngModel)]="Empleado.apellido"
+                        formControlName="Apellido">
+
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>
+                        Email:
+                    </label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="Empleado.email"
+                        formControlName="Email">
+
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Telefono:
+                    </label>
+                    <input type="text" class="form-control" minlength="10" maxlength="11" name="tel"
+                        [(ngModel)]="Empleado.telefono" formControlName="Telefono">
+
+                </div>
+
+                <div class="col-md-12">
+                    <label>
+                        Direccion:
+                    </label>
+                    <input type="text" class="form-control" name="tel" [(ngModel)]="Empleado.direccion"
+                        formControlName="Direccion">
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Tipo de documento: 
+                    </label>
+                    <select type="select" class="form-control" name="tipodoc" [(ngModel)]="Empleado.tiposdocs"
+                        formControlName="TiposDoc">
+                        <option [ngValue]="td" *ngFor="let td of arrTiposDocs">{{td.descripcion}}</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>
+                        Nro. Documento:
+                    </label>
+                    <input type="text" class="form-control" name="nrodoc" minlength="7" maxlength="8"
+                        [(ngModel)]="Empleado.dni" formControlName="Dni">
+
+                </div>
+
+
+            </div>
+
+            <button class="btn btn-primary mt-3" (click)="postEmpleados()" [disabled]="!empleadoForm.valid">Agregar
+                empleado</button>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of arrEmpleados">
+            <th scope="row">{{emp.id}}</th>
+            <td>{{emp.nombre}} {{emp.apellido}}</td>
+            <td>{{emp.direccion}}</td>
+            <td>{{emp.telefono}}</td>
+            <td>
+
+                <button type="button" (click)="edit(emp)" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample" class="mr-2 btn btn-success">Editar</button>
+
+                <button type="button" (click)="delete(emp.id)" class="btn btn-danger">Eliminar</button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
